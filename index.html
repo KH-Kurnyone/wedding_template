@@ -8,6 +8,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" />
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
     <style>
+      body {
+        zoom: 110%;
+      }
       .bg {
         background-image: url('src/img/bg.jpg');
         background-size: cover;
@@ -117,6 +120,16 @@
     <div class="sm:hidden my-container">
       <div id="scrollWeb" class="snap-y snap-mandatory h-screen overflow-y-hidden overflow-x-hidden scroll-smooth">
         <section id="sectionIndex" class="snap-start relative h-screen w-full">
+          <!-- Overlay background -->
+          <div id="overlay" class="absolute right-0 left-0 top-0 bottom-0 z-40 bg-black opacity-90"></div>
+
+          <!-- Button container (opacity 100%) -->
+          <div id="overlay_btn" class="absolute right-0 left-0 top-0 bottom-0 z-50 flex justify-center items-center p-5">
+            <div class="text-center">
+              <div class="text-gray-50">Disarankan untuk menggunakan layar full screen untuk mengakses web ini.</div>
+              <button type="button" id="btn_f11" class="bg-indigo-600 hover:bg-indigo-500 transition cursor-pointer rounded-full px-5 py-2 text-gray-50 font-semibold text-sm mt-5">Full Screen</button>
+            </div>
+          </div>
           <div class="bg absolute right-0 top-0 left-0 bottom-0 -z-10 bg-fixed"></div>
 
           <div class="absolute -right-1 bottom-0" data-aos="fade-left">
@@ -165,7 +178,6 @@
                   <i class="fa-solid fa-envelope-open-text"></i>
                   Buka Undangan
                 </button>
-                <button type="button" id="btn_f11" class="bg-indigo-600 hover:bg-indigo-500 transition cursor-pointer rounded-full px-5 py-2 mt-5 text-gray-50 font-semibold text-sm animate-[custom-blink_3s_ease-in-out_infinite]">Full Screen</button>
               </div>
             </div>
           </div>
@@ -382,6 +394,9 @@
       </div>
 
       <audio id="bg_music" src="src/music/music1.mp3" loop></audio>
+      <button id="btn_full" type="button" class="absolute cursor-pointer h-14 w-14 bg-indigo-600 hover:bg-indigo-500 p-5 text-white rounded-full right-5 bottom-22 hidden justify-center items-center">
+          <i class="fa-solid fa-expand"></i>
+      </button>
       <button id="btn_music" type="button" class="absolute cursor-pointer h-14 w-14 bg-indigo-600 hover:bg-indigo-500 p-5 text-white rounded-full right-5 bottom-5 hidden justify-center items-center animate-slow-spin">
         <div class="relative">
           <i class="fa-solid fa-music"></i>
@@ -410,6 +425,7 @@
         const scrollWeb = document.getElementById('scrollWeb');
         const section1 = document.getElementById('section1');
         const btnMusic = document.getElementById('btn_music');
+        const btn_full = document.getElementById('btn_full');
         const bgMusic = document.getElementById('bg_music');
 
         // Ganti class overflow-y-hidden menjadi overflow-y-scroll
@@ -419,6 +435,9 @@
         // Hapus class hidden dari btn_music
         btnMusic.classList.remove('hidden');
         btnMusic.classList.add('flex');
+
+        btn_full.classList.remove('hidden');
+        btn_full.classList.add('flex');
 
         // Delay scroll agar class sudah diterapkan
         setTimeout(() => {
@@ -468,6 +487,7 @@
 
     <script>
       const btn = document.getElementById('btn_f11');
+      const btn_full = document.getElementById('btn_full');
 
       btn.addEventListener('click', () => {
         if (!document.fullscreenElement) {
@@ -479,6 +499,24 @@
           // Keluar fullscreen
           document.exitFullscreen();
         }
+      });
+      btn_full.addEventListener('click', () => {
+        if (!document.fullscreenElement) {
+          // Masuk fullscreen
+          document.documentElement.requestFullscreen().catch((err) => {
+            console.error(`Gagal masuk fullscreen: ${err.message}`);
+          });
+        } else {
+          // Keluar fullscreen
+          document.exitFullscreen();
+        }
+      });
+    </script>
+
+    <script>
+      document.getElementById('overlay_btn').addEventListener('click', function () {
+        document.getElementById('overlay_btn').classList.add('hidden');
+        document.getElementById('overlay').classList.add('hidden');
       });
     </script>
   </body>
