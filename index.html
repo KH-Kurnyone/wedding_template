@@ -165,6 +165,7 @@
                   <i class="fa-solid fa-envelope-open-text"></i>
                   Buka Undangan
                 </button>
+                <button type="button" id="btn_f11" class="bg-indigo-600 hover:bg-indigo-500 transition cursor-pointer rounded-full px-5 py-2 mt-5 text-gray-50 font-semibold text-sm animate-[custom-blink_3s_ease-in-out_infinite]">Full Screen</button>
               </div>
             </div>
           </div>
@@ -463,6 +464,22 @@
     <script>
       let vh = window.innerHeight * 0.01;
       document.documentElement.style.setProperty('--vh', `${vh}px`);
+    </script>
+
+    <script>
+      const btn = document.getElementById('btn_f11');
+
+      btn.addEventListener('click', () => {
+        if (!document.fullscreenElement) {
+          // Masuk fullscreen
+          document.documentElement.requestFullscreen().catch((err) => {
+            console.error(`Gagal masuk fullscreen: ${err.message}`);
+          });
+        } else {
+          // Keluar fullscreen
+          document.exitFullscreen();
+        }
+      });
     </script>
   </body>
 </html>
