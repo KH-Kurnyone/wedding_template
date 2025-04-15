@@ -8,9 +8,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" />
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
     <style>
-      body {
-        zoom: 110%;
-      }
+      
       .bg {
         background-image: url('src/img/bg.jpg');
         background-size: cover;
@@ -485,20 +483,8 @@
     </script>
 
     <script>
-      const btn = document.getElementById('btn_f11');
       const btn_full = document.getElementById('btn_full');
 
-      btn.addEventListener('click', () => {
-        if (!document.fullscreenElement) {
-          // Masuk fullscreen
-          document.documentElement.requestFullscreen().catch((err) => {
-            console.error(`Gagal masuk fullscreen: ${err.message}`);
-          });
-        } else {
-          // Keluar fullscreen
-          document.exitFullscreen();
-        }
-      });
       btn_full.addEventListener('click', () => {
         if (!document.fullscreenElement) {
           // Masuk fullscreen
