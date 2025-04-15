@@ -107,10 +107,14 @@
       .floating-top {
         animation: floatTopToBot 3s ease-in-out infinite;
       }
+
+      .my-container {
+        height: calc(var(--vh, 1vh) * 100);
+      }
     </style>
   </head>
   <body class="bg-gray-50 relative">
-    <div class="sm:hidden">
+    <div class="sm:hidden my-container">
       <div id="scrollWeb" class="snap-y snap-mandatory h-screen overflow-y-hidden overflow-x-hidden scroll-smooth">
         <section id="sectionIndex" class="snap-start relative h-screen w-full">
           <div class="bg absolute right-0 top-0 left-0 bottom-0 -z-10 bg-fixed"></div>
@@ -454,6 +458,11 @@
           section2.scrollIntoView({ behavior: 'smooth' });
         }, 200);
       });
+    </script>
+
+    <script>
+      let vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty('--vh', `${vh}px`);
     </script>
   </body>
 </html>
